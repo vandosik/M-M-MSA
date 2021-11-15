@@ -9,3 +9,4 @@
 >report.docx and **README file which is a copy of the Markdown github report**
 ## Dataset files
 All used datasets are publicated in [Datasets folder](https://github.com/vandosik/M-M-MSA/tree/master/Datasets "This folder contains datasets files")
+## Participants of the project
