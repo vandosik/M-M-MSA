@@ -11,3 +11,6 @@
 ## Dataset files
 All used datasets are publicated in [Datasets folder](https://github.com/vandosik/M-M-MSA/tree/master/Datasets "This folder contains datasets files")
 ## Participants of the project
+* Ivan Dubinin: [vandosik](https://github.com/vandosik)
+* Alexey Grandilevskii: [zer0deck](https://github.com/zer0deck)
+* Mikhail Sorokin: [Mikha1lSorokin](https://github.com/Mikha1lSorokin)
