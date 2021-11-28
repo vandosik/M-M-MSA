@@ -1,0 +1,129 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.css" type="text/css" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis-network.min.js"> </script>
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+<style type="text/css">
+
+        #mynetwork {
+            width: 100%;
+            height: 800px;
+            background-color: #ffffff;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+        
+
+        
+
+        
+</style>
+
+</head>
+
+<body>
+<div id = "mynetwork"></div>
+
+
+<script type="text/javascript">
+
+    // initialize global variables.
+    var edges;
+    var nodes;
+    var network; 
+    var container;
+    var options, data;
+
+    
+    // This method is responsible for drawing the graph, returns the drawn network
+    function drawGraph() {
+        var container = document.getElementById('mynetwork');
+        
+        
+
+        // parsing and collecting nodes and edges from the python
+        nodes = new vis.DataSet([{"color": "#eb3d3d", "font": {"size": 36}, "id": "blueTotalHeal", "label": "blueTotalHeal", "level": 2, "shape": "dot", "size": 45, "title": "\u0423\u0437\u0435\u043b \u0431\u0430\u0439\u0435\u0441\u043e\u0432\u0441\u043a\u043e\u0439 \u0441\u0435\u0442\u0438 blueTotalHeal"}, {"color": "#eb3d3d", "font": {"size": 36}, "id": "blueTotalGold", "label": "blueTotalGold", "level": 1, "shape": "dot", "size": 45, "title": "\u0423\u0437\u0435\u043b \u0431\u0430\u0439\u0435\u0441\u043e\u0432\u0441\u043a\u043e\u0439 \u0441\u0435\u0442\u0438 blueTotalGold"}, {"color": "#eb3d3d", "font": {"size": 36}, "id": "blueChampionDamageDealt", "label": "blueChampionDamageDealt", "level": 2, "shape": "dot", "size": 45, "title": "\u0423\u0437\u0435\u043b \u0431\u0430\u0439\u0435\u0441\u043e\u0432\u0441\u043a\u043e\u0439 \u0441\u0435\u0442\u0438 blueChampionDamageDealt"}, {"color": "#eb3d3d", "font": {"size": 36}, "id": "blueTotalMinionKills", "label": "blueTotalMinionKills", "level": 0, "shape": "dot", "size": 45, "title": "\u0423\u0437\u0435\u043b \u0431\u0430\u0439\u0435\u0441\u043e\u0432\u0441\u043a\u043e\u0439 \u0441\u0435\u0442\u0438 blueTotalMinionKills"}, {"color": "#eb3d3d", "font": {"size": 36}, "id": "blueWardPlaced", "label": "blueWardPlaced", "level": 0, "shape": "dot", "size": 45, "title": "\u0423\u0437\u0435\u043b \u0431\u0430\u0439\u0435\u0441\u043e\u0432\u0441\u043a\u043e\u0439 \u0441\u0435\u0442\u0438 blueWardPlaced"}, {"color": "#eb3d3d", "font": {"size": 36}, "id": "gameDuraton", "label": "gameDuraton", "level": 0, "shape": "dot", "size": 45, "title": "\u0423\u0437\u0435\u043b \u0431\u0430\u0439\u0435\u0441\u043e\u0432\u0441\u043a\u043e\u0439 \u0441\u0435\u0442\u0438 gameDuraton"}, {"color": "#eb3d3d", "font": {"size": 36}, "id": "blueWardkills", "label": "blueWardkills", "level": 0, "shape": "dot", "size": 45, "title": "\u0423\u0437\u0435\u043b \u0431\u0430\u0439\u0435\u0441\u043e\u0432\u0441\u043a\u043e\u0439 \u0441\u0435\u0442\u0438 blueWardkills"}, {"color": "#eb3d3d", "font": {"size": 36}, "id": "blueKills", "label": "blueKills", "level": 0, "shape": "dot", "size": 45, "title": "\u0423\u0437\u0435\u043b \u0431\u0430\u0439\u0435\u0441\u043e\u0432\u0441\u043a\u043e\u0439 \u0441\u0435\u0442\u0438 blueKills"}, {"color": "#eb3d3d", "font": {"size": 36}, "id": "blueDeath", "label": "blueDeath", "level": 2, "shape": "dot", "size": 45, "title": "\u0423\u0437\u0435\u043b \u0431\u0430\u0439\u0435\u0441\u043e\u0432\u0441\u043a\u043e\u0439 \u0441\u0435\u0442\u0438 blueDeath"}, {"color": "#eb3d3d", "font": {"size": 36}, "id": "blueJungleMinionKills", "label": "blueJungleMinionKills", "level": 0, "shape": "dot", "size": 45, "title": "\u0423\u0437\u0435\u043b \u0431\u0430\u0439\u0435\u0441\u043e\u0432\u0441\u043a\u043e\u0439 \u0441\u0435\u0442\u0438 blueJungleMinionKills"}, {"color": "#eb3d3d", "font": {"size": 36}, "id": "blueObjectDamageDealt", "label": "blueObjectDamageDealt", "level": 0, "shape": "dot", "size": 45, "title": "\u0423\u0437\u0435\u043b \u0431\u0430\u0439\u0435\u0441\u043e\u0432\u0441\u043a\u043e\u0439 \u0441\u0435\u0442\u0438 blueObjectDamageDealt"}, {"color": "#3d46eb", "font": {"size": 36}, "id": "blueWins", "label": "blueWins", "level": 2, "shape": "dot", "size": 45, "title": "\u0423\u0437\u0435\u043b \u0431\u0430\u0439\u0435\u0441\u043e\u0432\u0441\u043a\u043e\u0439 \u0441\u0435\u0442\u0438 blueWins"}]);
+        edges = new vis.DataSet([{"arrows": "to", "from": "blueTotalGold", "to": "blueTotalHeal"}, {"arrows": "to", "from": "blueTotalMinionKills", "to": "blueTotalGold"}, {"arrows": "to", "from": "blueWardPlaced", "to": "blueTotalGold"}, {"arrows": "to", "from": "gameDuraton", "to": "blueTotalGold"}, {"arrows": "to", "from": "gameDuraton", "to": "blueChampionDamageDealt"}, {"arrows": "to", "from": "gameDuraton", "to": "blueTotalHeal"}, {"arrows": "to", "from": "blueWardkills", "to": "blueTotalGold"}, {"arrows": "to", "from": "blueKills", "to": "blueTotalGold"}, {"arrows": "to", "from": "blueKills", "to": "blueChampionDamageDealt"}, {"arrows": "to", "from": "blueJungleMinionKills", "to": "blueTotalGold"}, {"arrows": "to", "from": "blueObjectDamageDealt", "to": "blueTotalGold"}]);
+
+        // adding nodes and edges to the graph
+        data = {nodes: nodes, edges: edges};
+
+        var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": false,
+            "type": "continuous"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "layout": {
+        "hierarchical": {
+            "blockShifting": true,
+            "edgeMinimization": true,
+            "enabled": true,
+            "levelSeparation": 150,
+            "parentCentralization": true,
+            "sortMethod": "hubsize",
+            "treeSpacing": 200
+        },
+        "improvedLayout": true,
+        "randomSeed": 0
+    },
+    "physics": {
+        "enabled": true,
+        "hierarchicalRepulsion": {
+            "centralGravity": 0.5,
+            "damping": 0.09,
+            "nodeDistance": 300,
+            "springConstant": 0.01,
+            "springLength": 100
+        },
+        "solver": "hierarchicalRepulsion",
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+        
+        
+
+        
+
+        network = new vis.Network(container, data, options);
+	 
+        
+
+
+        
+
+        return network;
+
+    }
+
+    drawGraph();
+
+</script>
+</body>
+</html>
